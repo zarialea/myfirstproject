@@ -18,4 +18,3 @@ A "restart" button is included to refresh the page and shuffle the cards for a n
 
 Good Luck! :)
 
-
