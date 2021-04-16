@@ -1,7 +1,10 @@
 The Goonies Memory Game! 
+------------------------
 
 
-A matching/memory card game with The Goonies theme.
+*A matching/memory card game with The Goonies theme.
+
+
 
 There are 12 cards on the board; The goal is to match all 6 pairs. 
 Select 2 boxes at a time. If there is a match, a new card style will be shown to compute the match.
