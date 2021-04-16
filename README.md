@@ -2,7 +2,7 @@ The Goonies Memory Game!
 ------------------------
 
 
-*A matching/memory card game with The Goonies theme.
+A matching/memory card game with The Goonies theme.
 
 
 
