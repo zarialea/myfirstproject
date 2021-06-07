@@ -1,6 +1,6 @@
 // creating an array of objects 
 
-const boxesArray = [
+let cardsArray = [
   {
     'box': 'mikey',
     'img': 'https://www.preserveddragons.com/Illustrations/images/characterdb/TheGoonies/mikey_c.jpg',
@@ -51,20 +51,10 @@ const boxesArray = [
     },        
 ];
 
-
 function Restart() {
   window.location = "index.html"
-}
+};
 
-
-const gameBoard = boxesArray
-// using the "sort" method will sort the elements of the array and will return a sorted array
-// math.random -0.5 will give a number less than 0.5 which will be negative and if it's over 0.5 there will be a positive
-// thus creating a "shuffled" sequence
-boxesArray.sort(() => Math.random() - 0.5);
-
-
-let timer = null;
 let firstPick =  '';
 let secondPick = ''; 
 let count = 0;
@@ -73,33 +63,40 @@ let delay = 1100;
 
 
 
+
+
+
+
+// sort method will randomize the board 
+cardsArray.sort(() => Math.random() - 0.5);
+
 // acquire the 'game' element id
 // create new element of 'choices' to append to the DOM 'game' div
 // game = parentNode, board = childNode
-const game = document.getElementById('game');
-const board = document.createElement('choices');
-board.setAttribute('class', 'board');
+const game = document.getElementById("game");
+const board = document.createElement("choices");
+board.setAttribute("class", "board");
 game.appendChild(board);
 
-
+// shortcut function "=>" 
 // every item in the array that will be looped through boxesArray with forEach
-boxesArray.forEach(item => {
+cardsArray.forEach(item => {
   const { box, img } = item;  
 
-  // new div, add 'card' class to div
-  const card = document.createElement('div');
-  card.classList.add('card');
-  // creating the set attribute into a string with name dataset
+  // creating a new div with a class list called "card"
+  const card = document.createElement("div");
+  card.classList.add("card");
+  // creating the set attribute into a string with name dataset to refer to "box" key in the array
   card.dataset.name = box;
 
-  // new div, add 'front' class to div
-  const front = document.createElement('div');
-  front.classList.add('front');
+  // creating a div with a class called "front"
+  const front = document.createElement("div");
+  front.classList.add("front");
 
-  // new div, add 'back' class to div
-  const back = document.createElement('div');
-  back.classList.add('back');
-  // adding the back image to boxesArray string
+  // creating a div with a class called "back"
+  const back = document.createElement("div");
+  back.classList.add("back");
+  // creating the "back" to refer to the images of the array
   back.style.backgroundImage = `url(${img})`;
 
   // use appendChild to move one element to another in the board
@@ -112,9 +109,11 @@ boxesArray.forEach(item => {
 
 // creating a new class called "match" that will loop through "chosen" element when clicked
 const match = () => {
-  const chosen = document.querySelectorAll('.chosen');
+// creating a new 
+  const chosen = document.querySelectorAll(".chosen");
   chosen.forEach(card => {
-    card.classList.add('match');
+// creating a new class called "match" 
+    card.classList.add("match");
   });
 };
 
@@ -127,9 +126,9 @@ const resetCards = () => {
   count = 0;
   previousChoice = null;
 
-  var chosen = document.querySelectorAll('.chosen');
+  let chosen = document.querySelectorAll(".chosen");
   chosen.forEach(card => {
-    card.classList.remove('chosen');
+    card.classList.remove("chosen");
   });
 };
 
@@ -138,17 +137,8 @@ const resetCards = () => {
 // when a box is clicked, "chosen" class will be applied
 board.addEventListener('click', event => {
 
+// event.target will invoke because it will reference to the clicked card
   const clicked = event.target; 
-
-  // isolating only the inside divs to be chosen and not the entire board
-  if (
-    clicked.nodeName === 'choices' ||
-    clicked === previousChoice ||
-    clicked.parentNode.classList.contains('chosen') ||
-    clicked.parentNode.classList.contains('match')
-  ) {
-    return;
-  }
 
 // choosing 2 cards at once
   if (count < 2) {
@@ -157,19 +147,19 @@ board.addEventListener('click', event => {
       // the first pick with the selected class of 'chosen'
       firstPick = clicked.parentNode.dataset.name;
       console.log(firstPick);
-      clicked.parentNode.classList.add('chosen');
+      clicked.parentNode.classList.add("chosen");
     } else {
       // the second pick with the selected class of 'chosen'
       secondPick = clicked.parentNode.dataset.name;
       console.log(secondPick);
-      clicked.parentNode.classList.add('chosen');
+      clicked.parentNode.classList.add("chosen");
     }
 
     // when two boxes are flipped 
     if (firstPick && secondPick) {
       // when the boxes match
       if (firstPick == secondPick) {
-        // call the 'match' function}
+        // call the 'match' function
          match(delay) 
       }
       // 
@@ -180,4 +170,3 @@ board.addEventListener('click', event => {
   }
 
 });
-
